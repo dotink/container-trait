@@ -17,5 +17,14 @@
 	},
 	"autoload": {
 		"classmap": ["src/"]
+	},
+	"extra": {
+		"tails": {
+			"inkwell-2.0": {
+				"dotink/container-trait": {
+					"src": "library/traits"
+				}
+			}
+		}
 	}
 }
