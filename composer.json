@@ -3,6 +3,7 @@
 	"description": "A trait for classes which predominately wrap/contain other objects",
 	"keywords": ["depency injection"],
 	"license": "AGPL 3.0",
+	"type": "opus-package",
 	"authors": [
 		{
 			"name": "Matthew J. Sahagian",
