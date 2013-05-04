@@ -16,79 +16,12 @@
 	trait Container
 	{
 		/**
-		 * Registered prepare hooks
-		 *
-		 * @static
-		 * @access private
-		 * @var array
-		 */
-		static private $prepareHooks = array();
-
-
-		/**
 		 * The elements contained in this instance
 		 *
 		 * @access private
 		 * @var array
 		 */
 		private $elements = array();
-
-
-		/**
-		 * Register a prepare hook for a particular class
-		 *
-		 * The callback will be provided two parameters, the first is the instance of the object
-		 * to be prepared, the second is an array which can be received as a reference
-		 *
-		 * @final
-		 * @static
-		 * @access protected
-		 * @param string $class The class to register the prepare hook for
-		 * @param callable $callback The callback to run
-		 * @return void
-		 */
-		final static protected function prepare($class, $callback = NULL)
-		{
-			if (func_num_args() == 1) {
-				$callback = func_get_args(0);
-				$class    = get_called_class();
-			}
-
-			if (!is_callable($callback)) {
-				throw new Flourish\ProgrammerException(
-					'Cannot call prepare with non-callable entity'
-				);
-			}
-
-			self::$prepareHooks[$class] = $callback;
-		}
-
-
-		/**
-		 * The constructor for containers is final.
-		 *
-		 * The initialization logic of the class should be extended via prepare hooks
-		 * which are much more flexible.
-		 *
-		 * @final
-		 * @access public
-		 * @param array $elements An list of elements for the container to hold
-		 * @return void
-		 */
-		final public function __construct(Array $elements)
-		{
-			$this->elements = $elements;
-
-			foreach (self::$prepareHooks as $class => $callback) {
-				if ($this instanceof $class && is_callable($callback)) {
-					if ($callback instanceof \Closure) {
-						$callback($this);
-					} else {
-						call_user_func($callback, $this);
-					}
-				}
-			}
-		}
 
 
 		/**
@@ -158,5 +91,14 @@
 
 			return $this->elements[$offset];
 		}
+
+
+		final public function setContext(Array $context)
+		{
+			$this->elements = $context;
+
+			return $this;
+		}
 	}
 }
+
