@@ -2,7 +2,7 @@
 	"name": "dotink/container-trait",
 	"description": "A trait for classes which predominately wrap/contain other objects",
 	"keywords": ["depency injection"],
-	"license": "AGPL 3.0",
+	"license": "AGPL-3.0",
 	"type": "opus-package",
 	"authors": [
 		{
